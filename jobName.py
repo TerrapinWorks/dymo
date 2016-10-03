@@ -27,7 +27,7 @@ lastName = nameSplitter[1]
 firstName = nameSplitter[0]
 
 #write to clipboard txt
-f = open(out, 'w+')
+f = open(out, 'r+')
 lineOne = (lastName,", ",firstName,'\n', emailGetter, jobNum, cost, today)
 f.writelines(lineOne)
 f.close()
