@@ -23,9 +23,13 @@ except:
   cost = soup.find_all(text = re.compile("^Estimated Cost"))[0].next
 cost = cost[-6:-1]
 
-request_name = soup.find_all(text = re.compile("^Request:"))[0].next
-# Remove newline from request_name
-request_name = request_name[0:-1]
+try:
+  request_name = soup.find_all(text = re.compile("^Request:"))[0].next
+  # Remove newline from request_name
+  request_name = request_name[0:-1]
+except:
+  # Direct prints have no request name
+  request_name = "";
 
 #format
 nameSplitter = nameGetter.split()
