@@ -10,7 +10,15 @@
 		"default_popup": "popup.html"
 	},
 	
+	"content_scripts": [
+		{
+			"matches": ["http://*/*", "https://*/*"],
+			"js":["contentscript.js"]
+		}
+	],
+	
 	"permissions": [
-		"activeTab"
+		"activeTab", "tabs", "http://*/*", "https://*/*"
 	]
 }
+
