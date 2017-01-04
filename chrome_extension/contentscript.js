@@ -39,3 +39,4 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
 	var returnString = html;
 	sendResponse({textDOM: returnString});
 }); 
+

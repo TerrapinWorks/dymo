@@ -10,16 +10,30 @@
 document.addEventListener('DOMContentLoaded', function() {
   // Create listener for the button
   var printButton = document.getElementById('printButton');
-  printButton.addEventListener('click', function() {	
+  printButton.addEventListener('click', buttonClicked, false)	
+}, false);	// document.addEventListener callback
+
+
+// When button is pressed, send message to the contentscript
+function buttonClicked() {
 	// Get an object for the active tab
 	chrome.tabs.query({active: true, currentWindow: true}, function(tab_array){ 
-		// WHEN BUTTON IS PRESSED, SEND MESSAGE TO CONTENT SCRIPT
-		console.log("Sending message to the content script\n");
-		chrome.tabs.sendMessage(tab_array[0].id, {getHTML : true}, function(response) {
-			// Response will have the string form of the DOM
-			console.log("DOM Returned the webpage:\n");
-			console.log(response.textDOM);	
-		});		// chrome.tabs.sendMessage callback
-	});			// chrome.tabs.query callback
-  }, false); 	// printButton.addEventListener callback
-}, false); 		// document.addEventListener callback
+		console.log("Button pressed - sending message to the content script\n");
+		chrome.tabs.sendMessage(tab_array[0].id, {getHTML : true}, receiveMessage);		// chrome.tabs.sendMessage callback
+	});		// chrome.tabs.query callback
+}
+
+// When message is received, send to the Pi for processing
+function receiveMessage(response) {
+	// Response will have the string form of the DOM
+	try {
+		console.log("DOM Returned the webpage:\n");
+		console.log(response.textDOM);
+		console.log("\n\n Above is the HTML From the webpage");				
+	}
+	catch(err) {
+		console.log("Error running contentscript.js \n" + e.name + "\n" + e.message);
+		document.getElementById('error_message').innerHTML  = "Error running contentscript";
+		throw new Error("Error running content script");
+	}
+}
