@@ -29,11 +29,25 @@ function receiveMessage(response) {
 	try {
 		console.log("DOM Returned the webpage:\n");
 		console.log(response.textDOM);
-		console.log("\n\n Above is the HTML From the webpage");				
+		console.log("\n\n Above is the HTML From the webpage");
+		sendToServer(response.textDOM);
 	}
 	catch(err) {
 		console.log("Error running contentscript.js \n" + e.name + "\n" + e.message);
 		document.getElementById('error_message').innerHTML  = "Error running contentscript";
 		throw new Error("Error running content script");
 	}
+}
+
+// The string is sent to the server using an XMLHTTPRequest
+function sendToServer(message) {
+	httpRequest = new XMLHTTPRequest();
+	httpRequest.onreadystatechange = function() {
+		document.getElementById('error_message').innerHTML = "Message sent to Pi";
+	};
+	// Pi's static IP address is 192.168.1.92
+	httpRequest.open("POST", "192.168.1.92", true);
+	// TEST HERE TO MAKE SURE MIME TYPE IS CORRECT
+	httpRequest.sendRequestHeader('content-Type', 'text/html');
+	httpRequest.send(message);
 }
