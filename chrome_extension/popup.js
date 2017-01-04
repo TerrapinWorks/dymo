@@ -18,9 +18,7 @@ document.addEventListener('DOMContentLoaded', function() {
 		chrome.tabs.sendMessage(tab_array[0].id, {getHTML : true}, function(response) {
 			// Response will have the string form of the DOM
 			console.log("DOM Returned the webpage:\n");
-			console.log(response.farewell);
-			//document.getElementById('insertDOM').innerHTML = response;	
-			
+			console.log(response.textDOM);	
 		});		// chrome.tabs.sendMessage callback
 	});			// chrome.tabs.query callback
   }, false); 	// printButton.addEventListener callback
