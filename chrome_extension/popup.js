@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', function() {
   // Create listener for the button
   var printButton = document.getElementById('printButton');
   printButton.addEventListener('click', buttonClicked, false)	
-}, false);	// document.addEventListener callback
+}, false);
 
 
 // When button is pressed, send message to the contentscript
@@ -19,7 +19,7 @@ function buttonClicked() {
 	// Get an object for the active tab
 	chrome.tabs.query({active: true, currentWindow: true}, function(tab_array){ 
 		console.log("Button pressed - sending message to the content script\n");
-		chrome.tabs.sendMessage(tab_array[0].id, {getHTML : true}, receiveMessage);		// chrome.tabs.sendMessage callback
+		chrome.tabs.sendMessage(tab_array[0].id, {getHTML : true}, receiveMessage);
 	});		// chrome.tabs.query callback
 }
 
@@ -27,7 +27,7 @@ function buttonClicked() {
 function receiveMessage(response) {
 	// Response will have the string form of the DOM
 	try {
-		console.log("DOM Returned the webpage:\n");
+		console.log("Content sript returned the webpage:\n");
 		console.log(response.textDOM);
 		console.log("\n\n Above is the HTML From the webpage");
 		sendToServer(response.textDOM);
@@ -55,7 +55,6 @@ function sendToServer(message) {
 	};
 	// Pi's static IP address is 192.168.1.92
 	httpRequest.open("POST", "http://192.168.1.92:9292", true);
-	// TEST HERE TO MAKE SURE MIME TYPE IS CORRECT
-	httpRequest.setRequestHeader('Content-Type', 'text/html');
+	httpRequest.setRequestHeader('Content-Type', 'text/plain');
 	httpRequest.send(message);
 }
