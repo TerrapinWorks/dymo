@@ -46,7 +46,7 @@ function sendToServer(message) {
 		document.getElementById('error_message').innerHTML = "Message sent to Pi";
 	};
 	// Pi's static IP address is 192.168.1.92
-	httpRequest.open("POST", "192.168.1.92", true);
+	httpRequest.open("POST", "192.168.1.92:9292", true);
 	// TEST HERE TO MAKE SURE MIME TYPE IS CORRECT
 	httpRequest.sendRequestHeader('content-Type', 'text/html');
 	httpRequest.send(message);
