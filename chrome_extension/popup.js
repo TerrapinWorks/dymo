@@ -43,7 +43,15 @@ function receiveMessage(response) {
 function sendToServer(message) {
 	httpRequest = new XMLHttpRequest();
 	httpRequest.onreadystatechange = function() {
-		document.getElementById('error_message').innerHTML = "Message sent to Pi";
+		if (httpRequest.readyState == XMLHttpRequest.DONE) {
+			// The server is done handling the request
+			if (httpRequest.status == 200) {
+				// Ok signal sent by the server
+				console.log("Message received by Pi:\n" + httpRequest.responseText);
+				document.getElementById('error_message').innerHTML = httpRequest.responseText;
+			}
+		}
+		
 	};
 	// Pi's static IP address is 192.168.1.92
 	httpRequest.open("POST", "http://192.168.1.92:9292", true);
