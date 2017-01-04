@@ -33,7 +33,7 @@ function receiveMessage(response) {
 		sendToServer(response.textDOM);
 	}
 	catch(err) {
-		console.log("Error running contentscript.js \n" + e.name + "\n" + e.message);
+		console.log("Error running contentscript.js \n" + err.name + "\n" + err.message);
 		document.getElementById('error_message').innerHTML  = "Error running contentscript";
 		throw new Error("Error running content script");
 	}
@@ -41,13 +41,13 @@ function receiveMessage(response) {
 
 // The string is sent to the server using an XMLHTTPRequest
 function sendToServer(message) {
-	httpRequest = new XMLHTTPRequest();
+	httpRequest = new XMLHttpRequest();
 	httpRequest.onreadystatechange = function() {
 		document.getElementById('error_message').innerHTML = "Message sent to Pi";
 	};
 	// Pi's static IP address is 192.168.1.92
-	httpRequest.open("POST", "192.168.1.92:9292", true);
+	httpRequest.open("POST", "http://192.168.1.92:9292", true);
 	// TEST HERE TO MAKE SURE MIME TYPE IS CORRECT
-	httpRequest.sendRequestHeader('content-Type', 'text/html');
+	httpRequest.setRequestHeader('Content-Type', 'text/html');
 	httpRequest.send(message);
 }
