@@ -26,8 +26,7 @@ function onRequest(request, response) {
   }
   // When the request ends, save and send to the parsing script
   request.on('end', function() {
-    var jobName = spawn('python /home/pi/dymo/jobName.py', function(err, out, code) {
-    });
+    var jobName = spawn('python /home/pi/dymo/jobName.py', function(err, out, code){});
     response.writeHead(200, {"Content-Type": "text/plain"});
     response.end("Message Received\n");
   });
