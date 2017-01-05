@@ -33,7 +33,7 @@ function receiveMessage(response) {
 	}
 	catch(err) {
 		console.log("Error running contentscript.js \n" + err.name + "\n" + err.message);
-		document.getElementById('error_message').innerHTML  = "Error running contentscript  <br> Reload the page to fix this";
+		alert("Error running contentscript. Reload the page to fix this");
 		throw new Error("Error running content script");
 	}
 }
@@ -41,7 +41,17 @@ function receiveMessage(response) {
 // The string is sent to the server using an XMLHTTPRequest
 function sendToServer(message) {
 	httpRequest = new XMLHttpRequest();
-	httpRequest.onreadystatechange = function() {
+	httpRequest.onreadystatechange = receiveServerResponse;
+	// Pi's static IP address is 192.168.1.92
+	httpRequest.open("POST", "http://192.168.1.92:9292", true);
+	httpRequest.setRequestHeader('Content-Type', 'text/plain');
+	httpRequest.send(message);
+	// Close the page action so the user does not unecessarily print multiple copies
+	window.close();
+}
+
+// When message is received from the server, print to console and on the page action
+function receiveServerResponse() {
 		if (httpRequest.readyState == XMLHttpRequest.DONE) {
 			// The server is done handling the request
 			if (httpRequest.status == 200) {
@@ -49,11 +59,5 @@ function sendToServer(message) {
 				console.log("Message received by Pi:\n" + httpRequest.responseText);
 				document.getElementById('error_message').innerHTML = httpRequest.responseText;
 			}
-		}
-		
-	};
-	// Pi's static IP address is 192.168.1.92
-	httpRequest.open("POST", "http://192.168.1.92:9292", true);
-	httpRequest.setRequestHeader('Content-Type', 'text/plain');
-	httpRequest.send(message);
+		}	
 }
