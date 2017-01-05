@@ -41,19 +41,25 @@ function receiveMessage(response) {
 // The string is sent to the server using an XMLHTTPRequest
 function sendToServer(message) {
 	httpRequest = new XMLHttpRequest();
-	httpRequest.onreadystatechange = function() {
-		if (httpRequest.readyState == XMLHttpRequest.DONE) {
-			// The server is done handling the request
-			if (httpRequest.status == 200) {
-				// Ok signal sent by the server
-				console.log("Message received by Pi:\n" + httpRequest.responseText);
-				document.getElementById('error_message').innerHTML = httpRequest.responseText;
-			}
-		}
-		
-	};
+	httpRequest.onreadystatechange = onServerResponse;
 	// Pi's static IP address is 192.168.1.92
 	httpRequest.open("POST", "http://192.168.1.92:9292", true);
 	httpRequest.setRequestHeader('Content-Type', 'text/plain');
 	httpRequest.send(message);
+	console.log("Message sent to Pi");
+}
+
+function onServerResponse() {
+	if (httpRequest.readyState == XMLHttpRequest.DONE) {
+		// The server is done handling the request
+		if (httpRequest.status == 200) {
+			// Ok signal sent by the server
+			console.log("Message received by Pi:\n" + httpRequest.responseText);
+			// Change the page action to tell user that request is sent
+			printButton.parentNode.removeChild(printButton);
+			document.getElementById('text').innerHTML = "Request sent to printer";
+			// Auto close after 2.5 seconds
+			window.setTimeout(window.close, 2500);
+		}
+	}
 }
