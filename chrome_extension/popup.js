@@ -13,7 +13,6 @@ document.addEventListener('DOMContentLoaded', function() {
   printButton.addEventListener('click', buttonClicked, false)	
 }, false);
 
-
 // When button is pressed, send message to the contentscript
 function buttonClicked() {
 	// Get an object for the active tab
@@ -34,7 +33,7 @@ function receiveMessage(response) {
 	}
 	catch(err) {
 		console.log("Error running contentscript.js \n" + err.name + "\n" + err.message);
-		document.getElementById('error_message').innerHTML  = "Error running contentscript";
+		document.getElementById('error_message').innerHTML  = "Error running contentscript  <br> Reload the page to fix this";
 		throw new Error("Error running content script");
 	}
 }
