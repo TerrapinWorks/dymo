@@ -4,8 +4,8 @@
   The Dymo labelmaker is connected to a Raspberry Pi that is connected to the Terrapin Works network. 
   This allows lab managers to print labels for clients' prints. 
 </p>
-<br>
 
+<h2>Chrome Extension</h2>
 <p id="chrome_extension">
   The chrome_extension folder has the code for the 
   <a href="https://chrome.google.com/webstore/detail/terrapin-works-label-prin/hlmhjakokajncnencjkhieokhpkdilfl">
@@ -17,9 +17,10 @@
   <a href="https://docs.google.com/a/eng.umd.edu/document/d/12CAjwy1aIZTeaBpE2GL8NS2cRC6DzNVWBN9W_5VUYUk/edit?usp=sharing">
     here on Google Drive
   </a>
+  <img src="https://lh3.googleusercontent.com/qaJ5Jdjk1c0aZOEB96PgDw6flDJdmdBY-uVi476zQ8atYXEr8A1F0qqE5qJT4evm37GvjH5S2Fk=s640-h400-e365-rw" width="500px"/>
 </p>
-<br>
 
+<h2>ter.ps/twlabels</h2>
 <p id="twlabels">
   In addition to the Chrome Extension, the Pi is hosting a static webpage that allows direct upload of the HTML of a job page. Go to
   <a href="http://ter.ps/twlabels">
