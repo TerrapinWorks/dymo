@@ -56,7 +56,7 @@ function onServerResponse() {
   printButton.parentNode.removeChild(printButton); // remove the print button
 
   // if server sends back an okay and a sucess that means everything printed
-	if (httpRequest.status == 200 && httpRequest.response=="sucess" ){
+	if (httpRequest.status == 200 && httpRequest.response=="success" ){
 	   // change the text to the fact that request was sent to printer
      document.getElementById('text').innerHTML = "Printing infromation :)";
   	// Auto close after 2.1 seconds

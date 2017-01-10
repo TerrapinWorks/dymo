@@ -33,26 +33,36 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
    **********************************************************************/
 
   // at this point html should have all the html we need
-
+  
+     //take out everything in the html before the tag "<label>Job:</label>"
+   var split = html.split("<label>Job:</label>");
+   html=split.slice(1,split.length).join(""); // put the html back together
+   // Find job number
+   split= html.split("</li>");
+   var job = split[0]
+   html=split.slice(1,split.length).join(""); // put the html back together
+   job = job.replace("#", "");
+   console.log("Job: %s", job);
+   
    //take out everything in the html before the tag "<label>Requestor:</label>"
-   var split = html.split("<label>Requestor:</label>");
+   split = html.split("<label>Requestor:</label>");
    html=split.slice(1,split.length).join(""); // put the html back together
 
 
    // split the text at the tag
-   split = html.split("</li>");
+   split = html.split("<li>");
    // the first part should be the name
    var name = split[0]; // format firstName LastName
    html=split.slice(1,split.length).join("");// put the html back together
 
+   console.log("Name: %s", name);
 
    // change name to 'FirstName LastName' to FirstName/LastName
    name = name.replace(" ","/");
    // basically if it is uknown reply with a diff url
 
    if(name.includes("Unknown")){
-     console.log("I AM HERE in inkown");
-     var url = "http://192.168.1.92:8081/print/"+ "PRINT/DIRECT" + "/" +"STAFF" + "/" + "$0.00";
+     var url = "http://192.168.1.92:8081/print/"+ "PRINT/DIRECT" + "/" + job + "/" + "STAFF" + "/" + "$0.00";
     sendResponse(url);
    }
    else{
@@ -67,23 +77,30 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
       split = html.split("</a");
       var email = split[0];
       html=split.slice(1,split.length).join("");
+	  
+	  console.log("Email: %s", email);
 
       split =html.split("= ");
       html=split.slice(1,split.length).join("");
 
-      split=html.split("<li");
+      split=html.split("<br");
       var cost = split[0];
       html=split.slice(1,split.length).join("");
+	  
+	  console.log("Cost: %s", cost)
+	  
+	  
+	  
 
       /**************************************************************************
       THIS IS THE END OF THE SCRAPER
       ***************************************************************************/
 
 
-      // TODO change url to the static IP
       // now actually add all the params together
-      var url = "http://127.0.0.1:8081/print/"+ name + "/" +email + "/" + cost;
+      var url = "http://192.168.1.92:8081/print/"+ name + "/" + job + "/" + email + "/" + cost;
       url = url.replace(" ",""); // take out any spaces
+	  url = url.replace(/(\r\n|\n|\r)/gm,"");
       console.log(url);
       // if any of the parems are empty that is because the scrape failed
       // if it could also be beacuse the url is too long
