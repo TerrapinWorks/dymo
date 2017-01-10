@@ -12,15 +12,15 @@
   function formToServer(){
     var firstName = document.getElementById("firstName").value;
     var lastName = document.getElementById("lastName").value;
+		var id = document.getElementById("id").value;
     var email = document.getElementById("email").value;
     var cost = document.getElementById("cost").value;
 
     if(!cost.includes("$")){
       cost = "$" + cost;
     }
-    // we can assume that all input is correct.. if they inputted too many characters the server will respond either way
-    var url = "http://192.168.1.92:8081/print/" +  firstName + "/"+ lastName +"/" +email + "/" + cost;
-    // this will invoke onServerResponse() when server responds
+    // We assume that all input is correct. If too many characters are input, the server will respond appropriately
+    var url = "http://192.168.1.92:8081/print/" +  firstName + "/"+ lastName +"/" + id + "/" + email + "/" + cost;
     httpRequest = new XMLHttpRequest();
     httpRequest.onreadystatechange = onServerResponse;
     httpRequest.open("GET", url, true);
@@ -28,24 +28,18 @@
   }
 
   function onServerResponse() {
-
     if (httpRequest.readyState == XMLHttpRequest.DONE) {
-    // at this point the server should have handled the request
-
-    // if server sends back an okay and a sucess that means everything printed
-  	if (httpRequest.status == 200 && httpRequest.response=="sucess" ){
-  	   // change the text to the fact that request was sent to printer
-       console.log("WIN");
-       document.getElementById("form").innerHTML="Sending infromation to printer"
-
-
+  	if (httpRequest.status == 200 && httpRequest.response=="success" ){
+			 // Request was successfully completed
+       console.log("Request successfully sent to server");
+       document.getElementById("form").innerHTML="Information sent to printer"
   	}
     else if(httpRequest.response){
-      document.getElementById("form").innerHTML="Paremeters were too long.. request denied due to save ink (server.js line 51)";
+      document.getElementById("form").innerHTML="Paremeters were too long. Request denied due to save ink (server.js line 51)";
     }
-    // else means that most lilkey the server is not online (I cant think of any other problems)
+    // The most likely other problem is that the server is down.
     else{
-      document.getElementById("form").innerHTML="Server has crashed :(";
+      document.getElementById("form").innerHTML="Server has crashed." 
     }
   }
 }
@@ -53,7 +47,7 @@
   <body>
     <h2> Manual Printing Page </h2>
 
-    <span id="form">Opps.. the extention could not find the correct infromation automaticaly
+    <span id="form">The extension could not find the correct information automatically.
       <br/>Input the correct infromation and then press print </span>
       <br/><br/>
 
@@ -66,6 +60,10 @@
             <td>Last name: </td>
             <td> <input type="text" name="lName" value="" id="lastName"></td>
           </tr>
+					<tr>
+						<td>Job Number: </td>
+						<td> <input type="text" name="id" value="" id="id"></td>
+					</tr>
           <tr>
             <td>Email: </td>
             <td><input type="text" name="email" value="" id="email"></td>
@@ -77,8 +75,5 @@
           <tr><td><input id="button" type="button" value=" Print Label" onclick="formToServer();" /></td></tr>
         </table>
       <span id="response"></span>
-
-
-
 </body>
 </html>
