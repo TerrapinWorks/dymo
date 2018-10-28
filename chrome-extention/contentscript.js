@@ -62,7 +62,7 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
    // basically if it is uknown reply with a diff url
 
    if(name.includes("Unknown")){
-     var url = "http://192.168.1.92:8081/print/"+ "PRINT/DIRECT" + "/" + job + "/" + "STAFF" + "/" + "$0.00";
+     var url = "http://labelmaker:8081/print/"+ "PRINT/DIRECT" + "/" + job + "/" + "STAFF" + "/" + "$0.00";
     sendResponse(url);
    }
    else{
@@ -98,7 +98,7 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
 
 
       // now actually add all the params together
-      var url = "http://192.168.1.92:8081/print/"+ name + "/" + job + "/" + email + "/" + cost;
+      var url = "http://labelmaker:8081/print/"+ name + "/" + job + "/" + email + "/" + cost;
       url = url.replace(" ",""); // take out any spaces
 	  url = url.replace(/(\r\n|\n|\r)/gm,"");
       console.log(url);
