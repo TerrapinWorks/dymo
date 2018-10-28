@@ -58,7 +58,7 @@ app.get('/print/:firstName/:lastName/:id/:email/:cost', function (req, res) {
 
 
     // print to dymo
-    spawn('lpr -P DYMO_LabelWriter_450_Turbo -o portrait print.txt', function(err, out, code){});
+    spawn('lp print.txt', function(err, out, code){});
 
     // send back that printing was a success
     res.end("success");
