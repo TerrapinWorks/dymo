@@ -31,8 +31,8 @@ function receiveURL(url) {
     // remove the print button
     printButton.parentNode.removeChild(printButton);
     // explain that request failed and give them link for manual page, then show them the webscrape error page
-    document.getElementById('text').innerHTML = "<br/>Request Failed, click<a target='_blank' href='http://192.168.1.92:8081/'> here </a>for manual input <br/>" +
-     "For more infromation on this error click <a target='_blank' href='http://192.168.1.92:8081/scrape.html'> here</a>";
+    document.getElementById('text').innerHTML = "<br/>Request Failed, click<a target='_blank' href='http://labelserver:8081/'> here </a>for manual input <br/>" +
+     "For more infromation on this error click <a target='_blank' href='http://labelserver:8081/scrape.html'> here</a>";
     document.body.style.width = '400px'; // set pop up to be a bit wider to fit text well
 
   }
