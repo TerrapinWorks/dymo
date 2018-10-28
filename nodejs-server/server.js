@@ -69,5 +69,5 @@ app.get('/print/:firstName/:lastName/:id/:email/:cost', function (req, res) {
 
 // make the server listen on port 8081
 var server = app.listen(8081, function () {
-  console.log("server loaded on: http://192.168.1.92:8081/");
+  console.log("server loaded on: http://labelserver:8081/");
 })
