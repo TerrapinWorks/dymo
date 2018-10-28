@@ -17,7 +17,7 @@ var fs = require("fs");
 
 // Hosts the static backup page in case the chrome extention fails for some reason.
 // we keep the static pages in a sub folder for security reasons -- this way no one can access this folder without access to the pi
-// to acess the back up page just use http://192.168.1.92:8081/.. no need to go to the back up page folder
+// to acess the back up page just use http://labelserver:8081/.. no need to go to the back up page folder
 app.use('/', express.static(__dirname + '/backupPage/'));
 
 
