@@ -20,7 +20,7 @@
       cost = "$" + cost;
     }
     // We assume that all input is correct. If too many characters are input, the server will respond appropriately
-    var url = "http://192.168.1.92:8081/print/" +  firstName + "/"+ lastName +"/" + id + "/" + email + "/" + cost;
+    var url = "http://labelserver:8081/print/" +  firstName + "/"+ lastName +"/" + id + "/" + email + "/" + cost;
     httpRequest = new XMLHttpRequest();
     httpRequest.onreadystatechange = onServerResponse;
     httpRequest.open("GET", url, true);
