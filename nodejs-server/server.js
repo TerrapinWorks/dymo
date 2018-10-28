@@ -60,6 +60,8 @@ app.get('/print/:firstName/:lastName/:id/:email/:cost', function (req, res) {
     // print to dymo
     spawn('lp print.txt', function(err, out, code){});
 
+	  //log that this is printing
+	  console.log("p");
     // send back that printing was a success
     res.end("success");
   }
