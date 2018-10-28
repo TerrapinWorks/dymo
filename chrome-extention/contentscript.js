@@ -98,7 +98,7 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
 
 
       // now actually add all the params together
-      var url = "http://labelmaker:8081/print/"+ name + "/" + job + "/" + email + "/" + cost;
+      var url = "http://labelserver:8081/print/"+ name + "/" + job + "/" + email + "/" + cost;
       url = url.replace(" ",""); // take out any spaces
 	  url = url.replace(/(\r\n|\n|\r)/gm,"");
       console.log(url);
