@@ -10,7 +10,7 @@ var express = require('express');
 var app = express();
 
 // Execute shell commands
-var spawn = require('child_process').exec;
+var spawn = require('child_process').spawn;
 
 // Write text file to send to the Dymo
 var fs = require("fs");
@@ -53,15 +53,14 @@ app.get('/print/:firstName/:lastName/:id/:email/:cost', function (req, res) {
   }
   // if its shorter than that we can print it
   else{
+
     // write that text to a file called print.txt
     fs.writeFile("print.txt", text , function(err) {});
 
 
-    // print to dymo
-    spawn('lp print.txt', function(err, out, code){});
+    // wake up printer and then  print 
+    spawn('cupsenable DYMO_LabelWriter_450_Turbo && lp print.txt', {shell: true});
 
-	  //log that this is printing
-	  console.log("p");
     // send back that printing was a success
     res.end("success");
   }
