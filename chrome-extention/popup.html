@@ -1,25 +1,93 @@
+
 <!doctype html>
 <html>
   <head>
-    <title>Terrapin Works Label Printing</title>
+    <title>Terrapin Works MIC Tool </title>
     <script src="popup.js"></script>
+
 	<style>
 		body {
-			min-width: 200px
+			min-width: 330px;
+      max-width: 331px;
+      background-color: #F5F5F5
 		}
-
+    #fillamentButton,
 		button {
-			dispay: block;
 			margin-left: auto;
 			margin-right: auto;
+      background-color: #CF202F; /* Dark Red == Terrapin */
+      border: none;
+      color: white;
+      padding: 10px 15px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
 		}
+
+    .first, .middle{
+      padding-right: 12px;
+      font-size: 11px;
+    }
+
+
+
+    .help{
+      font-size:12px;
+      float: right;
+      padding-right: 25px;
+      margin-top: 0px;
+    }
+
+    a{
+      color:#CF202F;
+    }
+
+    #scanErrorText, #DymoErrorText{
+      font-size: :10px;
+      color:#CF202F;
+      padding-left: 15px;
+    }
+
+
+
 	</style>
   </head>
 
   <body>
-    <center><h3 id="text">Click to print on the DYMO:</h3></center>
-    <center><button id="printButton"> Print </button></center>
-    <p id="error_message"></p>
-    <center><p style="font-size:11px"> Link for <a target="_blank" href="http://labelserver: ">custom labels</a></p></center>
+
+    <center> <img src="images/tw-logo-full.png"  height="60" /> <hr/></center>
+
+    <div id="dymo-section">
+      <center>
+        <h3> Printing on the Dymo </h3>
+        <button id="printButton" style="margin-right:10px"> Print Label  </button>
+        <span style="font-size:14px"> Link for <a target="_blank" href="http://labelserver:8081 ">Custom Labels</a></span>
+      <br/>
+
+      <br/>  <p id="DymoErrorText"> </p><hr/>
+      </center>
+    </div>
+
+    <div id="scan-section">
+      <center>
+        <h3> Scanning Fillament </h3>
+        Code: <input type="text" name="scanerCode" id ="scanCode" /> <br/><br/>
+        <a target="_blank" id="fillamentButton" style="margin-right:10px "> Track Fillament </a>
+        <span style="font-size:14px"> Link for <a target="_blank" href="https://assets.tw.umd.edu">Asset Managment</a></span>
+      </center>
+      <p id="scanErrorText"> </p>
+    </div>
+
+
+    <hr/>
+    <a class="first" href="https://portal.tw.umd.edu/" target="_blank"> TW Portal </a>
+    <a class = "middle" href="https://maker.umd.edu/job-ticketing/customer/rooms/1"> Papercut </a>
+    <a class = "middle" href="https://help.eng.umd.edu/helpdesk/"> Ticket System </a>
+    <p class="help" ><a target="_blank" href="https://docs.google.com/document/d/1lXl1l3ZjlJ_rZeJoF8O5Fl5HisoVmZqCW_jiMykETzM/edit#heading=h.powwyuega21t"><strong>Click for Help</strong></a></p>
+
+
+
   </body>
+
+
 </html>

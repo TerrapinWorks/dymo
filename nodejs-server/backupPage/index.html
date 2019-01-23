@@ -6,6 +6,7 @@
   <style>
     body{
       font-size:120%;
+      background-color:  #F5F5F5;
     }
   </style>
   <script>
@@ -39,16 +40,19 @@
     }
     // The most likely other problem is that the server is down.
     else{
-      document.getElementById("form").innerHTML="Server has crashed." 
+      document.getElementById("form").innerHTML="Server has crashed."
     }
   }
 }
   </script>
   <body>
+    <center>
+
+    <img src="tw-logo-full.png" height="100"/>
+    <hr/ width="600">
     <h2> Manual Printing Page </h2>
 
-    <span id="form">The extension could not find the correct information automatically.
-      <br/>Input the correct infromation and then press print </span>
+    <span id="form">Input the correct infromation and then press print </span>
       <br/><br/>
 
         <table name="input" id="form">
@@ -75,5 +79,6 @@
           <tr><td><input id="button" type="button" value=" Print Label" onclick="formToServer();" /></td></tr>
         </table>
       <span id="response"></span>
+    </center>
 </body>
 </html>
