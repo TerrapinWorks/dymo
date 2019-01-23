@@ -53,10 +53,11 @@ function scanInputChange(){
   // first we check if there are enough numbers
   if (val.length==0) {
       document.getElementById("scanErrorText").innerHTML = "";
-      button.removeAttribute("src");
+      button.removeAttribute("href");
   }
   else if(val.length!=12){
       document.getElementById("scanErrorText").innerHTML = "Error: scan code is 12 digits";
+      button.removeAttribute("href");
   }
 
   else{
@@ -112,6 +113,7 @@ function scanInputChange(){
     }
     else{
       document.getElementById("scanErrorText").innerHTML = "Error: not listed in the Chrome Extension";
+      button.removeAttribute("href");
     }
 
 
