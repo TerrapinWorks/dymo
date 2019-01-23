@@ -53,6 +53,7 @@ function scanInputChange(){
   // first we check if there are enough numbers
   if (val.length==0) {
       document.getElementById("scanErrorText").innerHTML = "";
+      button.removeAttribute("src");
   }
   else if(val.length!=12){
       document.getElementById("scanErrorText").innerHTML = "Error: scan code is 12 digits";
@@ -149,7 +150,7 @@ function receiveURL(url) {
     // remove the print button
     printButton.parentNode.removeChild(printButton);
     // explain that request failed and give them link for manual page, then show them the webscrape error page
-    document.getElementById('DymoErrorText').innerHTML = "<br/>Request Failed, click<a target='_blank' href='http://labelserver:8081/'> here </a>for manual input <br/>" +
+    document.getElementById('DymoErrorText').innerHTML = "<br/>Error: HTML scraper failed, use custom labels. <br/>" +
      "For more infromation on this error click <a target='_blank' href='http://labelserver:8081/scrape.html'> here</a>";
     document.body.style.width = '400px'; // set pop up to be a bit wider to fit text well
 

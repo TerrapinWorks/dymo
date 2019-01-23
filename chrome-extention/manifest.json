@@ -5,7 +5,7 @@
 	"short_name": "TW Label Printing",
 	"description": "One click printing for the Dymo",
 
-	"version": "1.4.0",
+	"version": "1.4.1",
 
 	"icons": {
 		"16": "images/icon_16.png",
